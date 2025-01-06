@@ -227,21 +227,21 @@ target_link_libraries( slate_lapack_api PUBLIC slate )
 #--------------------
 # scalapack_api
 # todo: requires ScaLAPACK
-# file(
-#     GLOB scalapack_api_src
-#     CONFIGURE_DEPENDS  # glob at build time
-#     scalapack_api/*.cc
-# )
-# # todo: getri not finished.
-# list( FILTER scalapack_api_src EXCLUDE REGEX "getri" )
-# message( DEBUG "scalapack_api_src = ${scalapack_api_src}" )
+file(
+    GLOB scalapack_api_src
+    CONFIGURE_DEPENDS  # glob at build time
+    scalapack_api/*.cc
+)
+# todo: getri not finished.
+list( FILTER scalapack_api_src EXCLUDE REGEX "getri" )
+message( DEBUG "scalapack_api_src = ${scalapack_api_src}" )
 #
-# add_library(
-#     slate_scalapack_api
-#     ${scalapack_api_src}
-# )
-# target_link_libraries( slate_scalapack_api PUBLIC slate )
-# target_link_libraries( slate_scalapack_api PUBLIC scalapack )
+add_library(
+    slate_scalapack_api
+    ${scalapack_api_src}
+)
+target_link_libraries( slate_scalapack_api PUBLIC slate )
+#target_link_libraries( slate_scalapack_api PUBLIC scalapack )
 
 #-------------------------------------------------------------------------------
 # Include directory.
@@ -422,7 +422,7 @@ message( DEBUG "blas_threaded = ${blas_threaded}" )
 message( "" )
 message( "---------------------------------------- BLAS++" )
 if (NOT TARGET blaspp)
-    find_package( blaspp QUIET )
+    #find_package( blaspp QUIET )
     if (blaspp_FOUND)
         message( STATUS "   Found BLAS++: ${blaspp_DIR}" )
     elseif (EXISTS "${CMAKE_SOURCE_DIR}/blaspp/CMakeLists.txt")
@@ -448,7 +448,7 @@ message( STATUS "BLAS++ done" )
 message( "" )
 message( "---------------------------------------- LAPACK++" )
 if (NOT TARGET lapackpp)
-    find_package( lapackpp QUIET )
+    #find_package( lapackpp QUIET )
     if (lapackpp_FOUND)
         message( STATUS "   Found LAPACK++: ${lapackpp_DIR}" )
 
@@ -706,7 +706,7 @@ endif()
 
 # Install library and add to <package>Targets.cmake
 install(
-    TARGETS slate slate_lapack_api
+    TARGETS slate slate_lapack_api slate_scalapack_api
     EXPORT slateTargets
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
