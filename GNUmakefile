@@ -71,8 +71,8 @@ abs_prefix      := ${abspath ${prefix}}
 # Export variables to sub-make for testsweeper, BLAS++, LAPACK++.
 export CXX blas blas_int blas_threaded openmp static gpu_backend
 
-CXXFLAGS   += -O3 -std=c++17 -Wall -Wshadow -pedantic -MMD
-NVCCFLAGS  += -O3 -std=c++11 --compiler-options '-Wall -Wno-unused-function'
+CXXFLAGS   += -O2 -std=c++17 -Wall -Wshadow -pedantic -MMD
+NVCCFLAGS  += -O2 -std=c++11 --compiler-options '-Wall -Wno-unused-function'
 HIPCCFLAGS += -std=c++14 -DTCE_HIP -fno-gpu-rdc
 
 force: ;
@@ -129,7 +129,8 @@ ifneq (${hip},1)
         # -Wno-pass-failed avoids (on src/omptarget/device_transpose.cc)
         # icpx warning: loop not vectorized.
         #
-        CXXFLAGS += -fsycl -fp-model=precise -Wno-unused-command-line-argument \
+        CXXFLAGS += -fsycl -fsycl-targets=spir64 -fp-model=precise \
+                    -Wno-unused-command-line-argument \
                     -Wno-c99-extensions -Wno-pass-failed
         LIBS += -lsycl
     endif
@@ -212,8 +213,11 @@ endif
 ifeq (${openmp},1)
     ifeq (${gpu_backend},sycl)
         # Intel icpx options for OpenMP offload.
-        CXXFLAGS += -fiopenmp -fopenmp-targets=spir64
-        LDFLAGS  += -fiopenmp -fopenmp-targets=spir64
+        CXXFLAGS += -qopenmp -fopenmp-targets=spir64
+        CXXFLAGS += -Wno-missing-template-arg-list-after-template-kw
+        CXXFLAGS += -DSLATE_HAVE_OMPTARGET
+        #CXXFLAGS += -DSLATE_SKIP_HOSTNEST
+        LDFLAGS  += -qopenmp -fopenmp-targets=spir64
     else
         # Most other compilers recognize this.
         CXXFLAGS += -fopenmp
@@ -826,9 +830,12 @@ unit_test = ${basename ${unit_src}}
 
 pkg = lib/pkgconfig/slate.pc
 
-# For `tester --debug`, lldb may need test.o compiled with -O0 (after -O3)
+# For `tester --debug`, lldb may need test.o compiled with -O0 prepended
 # to see variable `i`.
 test/test.o: CXXFLAGS += -O0
+
+src/internal/internal_gbnorm.o: CXXFLAGS += -O0
+src/internal/internal_hbnorm.o: CXXFLAGS += -O0
 
 #-------------------------------------------------------------------------------
 # Get Mercurial id, and make version.o depend on it via .id file.
