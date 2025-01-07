@@ -69,7 +69,7 @@ blas::real_type<scalar_t> slate_lantr(const char* normstr, const char* uplostr, 
     Uplo uplo{};
     Diag diag{};
     from_string( std::string( 1, normstr[0] ), &norm );
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, diagstr[0] ), &diag );
 
     int64_t lookahead = 1;

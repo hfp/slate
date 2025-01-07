@@ -98,7 +98,7 @@ void slate_psyr2k(const char* uplostr, const char* transstr, int n, int k, scala
 {
     Uplo uplo{};
     Op trans{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, transstr[0] ), &trans );
 
     static slate::Target target = slate_scalapack_set_target();

@@ -122,7 +122,7 @@ void slate_psymm(const char* sidestr, const char* uplostr, int m, int n, scalar_
     Side side{};
     Uplo uplo{};
     from_string( std::string( 1, sidestr[0] ), &side );
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     static slate::Target target = slate_scalapack_set_target();
     static int verbose = slate_scalapack_set_verbose();

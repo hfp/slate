@@ -95,7 +95,7 @@ template< typename scalar_t >
 void slate_pposv(const char* uplostr, int n, int nrhs, scalar_t* a, int ia, int ja, int* desca, scalar_t* b, int ib, int jb, int* descb, int* info)
 {
     Uplo uplo{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     static slate::Target target = slate_scalapack_set_target();
     static int verbose = slate_scalapack_set_verbose();

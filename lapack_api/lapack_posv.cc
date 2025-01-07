@@ -62,7 +62,7 @@ void slate_posv(const char* uplostr, const int n, const int nrhs, scalar_t* a, c
         MPI_Init_thread(nullptr, nullptr, MPI_THREAD_MULTIPLE, &provided);
 
     Uplo uplo{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     int64_t lookahead = 1;
     int64_t p = 1;

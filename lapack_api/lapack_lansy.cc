@@ -62,7 +62,7 @@ blas::real_type<scalar_t> slate_lansy(const char* normstr, const char* uplostr, 
     Norm norm{};
     Uplo uplo{};
     from_string( std::string( 1, normstr[0] ), &norm );
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     int64_t lookahead = 1;
     int64_t p = 1;

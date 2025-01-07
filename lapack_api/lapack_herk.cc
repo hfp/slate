@@ -49,7 +49,7 @@ void slate_herk(const char* uplostr, const char* transastr, const int n, const i
 
     Uplo uplo{};
     Op transA{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, transastr[0] ), &transA );
 
     int64_t lookahead = 1;

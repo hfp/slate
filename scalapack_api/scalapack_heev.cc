@@ -99,7 +99,7 @@ void slate_pheev(const char* jobzstr, const char* uplostr, int n, scalar_t* a, i
 {
     Uplo uplo{};
     Job jobz{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, jobzstr[0] ), &jobz );
 
     static slate::Target target = slate_scalapack_set_target();

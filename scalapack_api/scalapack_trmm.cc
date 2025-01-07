@@ -101,7 +101,7 @@ void slate_ptrmm(const char* sidestr, const char* uplostr, const char* transastr
     Op transA{};
     Diag diag{};
     from_string( std::string( 1, sidestr[0] ), &side );
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, transastr[0] ), &transA );
     from_string( std::string( 1, diagstr[0] ), &diag );
 

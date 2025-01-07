@@ -95,7 +95,7 @@ void slate_pocon(const char* uplostr, const int n, scalar_t* a, const int lda, b
     static slate::Target target = slate_lapack_set_target();
 
     Uplo uplo{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     // sizes
     static int64_t nb = slate_lapack_set_nb(target);

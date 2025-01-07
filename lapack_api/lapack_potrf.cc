@@ -60,7 +60,7 @@ void slate_potrf(const char* uplostr, const int n, scalar_t* a, const int lda, i
         MPI_Init_thread(nullptr, nullptr, MPI_THREAD_SERIALIZED, &provided);
 
     Uplo uplo{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     int64_t lookahead = 1;
     int64_t p = 1;

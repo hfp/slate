@@ -61,7 +61,7 @@ void slate_syr2k(const char* uplostr, const char* transastr, const int n, const 
 
     Uplo uplo{};
     Op trans{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, transastr[0] ), &trans );
 
     int64_t lookahead = 1;

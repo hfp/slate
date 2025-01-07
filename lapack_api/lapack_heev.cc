@@ -105,7 +105,7 @@ void slate_heev(const char* jobzstr, const char* uplostr, const int n, scalar_t*
         int64_t q = 1;
 
         Uplo uplo{};
-        from_string( std::string( 1, uplostr[0] ), &uplo );
+        from_string( uplostr, &uplo );
 
         // create SLATE matrix from the LAPACK data
         auto A = slate::Matrix<scalar_t>::fromLAPACK( n, n, a, lda, nb, p, q, MPI_COMM_WORLD );

@@ -95,7 +95,7 @@ void slate_ptrcon(const char* normstr, const char* uplostr, const char* diagstr,
     Uplo uplo{};
     Diag diag{};
     from_string( std::string( 1, normstr[0] ), &norm );
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, diagstr[0] ), &diag );
 
     static slate::Target target = slate_scalapack_set_target();

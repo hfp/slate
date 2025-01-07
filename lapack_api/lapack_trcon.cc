@@ -97,7 +97,7 @@ void slate_trcon(const char* normstr, const char* uplostr, const char* diagstr, 
     Uplo uplo{};
     Diag diag{};
     Norm norm{};
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
     from_string( std::string( 1, diagstr[0] ), &diag );
     from_string( std::string( 1, normstr[0] ), &norm );
 

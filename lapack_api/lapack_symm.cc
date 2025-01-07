@@ -63,7 +63,7 @@ void slate_symm(const char* sidestr, const char* uplostr, const int m, const int
     Side side{};
     Uplo uplo{};
     from_string( std::string( 1, sidestr[0] ), &side );
-    from_string( std::string( 1, uplostr[0] ), &uplo );
+    from_string( uplostr, &uplo );
 
     int64_t lookahead = 1;
     int64_t p = 1;
