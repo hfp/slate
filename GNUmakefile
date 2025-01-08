@@ -71,7 +71,7 @@ abs_prefix      := ${abspath ${prefix}}
 # Export variables to sub-make for testsweeper, BLAS++, LAPACK++.
 export CXX blas blas_int blas_threaded openmp static gpu_backend
 
-CXXFLAGS   += -O2 -std=c++17 -Wall -Wshadow -pedantic -MMD
+CXXFLAGS   += -O2 -std=c++17 -Wall -Wshadow -pedantic -MMD -DSLATE_NO_PHEEVD
 NVCCFLAGS  += -O2 -std=c++11 --compiler-options '-Wall -Wno-unused-function'
 HIPCCFLAGS += -std=c++14 -DTCE_HIP -fno-gpu-rdc
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the BSD 3-Clause license. See the accompanying LICENSE file.
-
+#if !defined(SLATE_NO_PHEEVD)
 #include "scalapack_slate.hh"
 
 namespace slate {
@@ -156,3 +156,5 @@ void slate_pheevd(const char* jobzstr, const char* uplostr, int n, scalar_t* a, 
 
 } // namespace scalapack_api
 } // namespace slate
+
+#endif /*!defined(SLATE_NO_PHEEVD)*/
