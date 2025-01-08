@@ -834,8 +834,12 @@ pkg = lib/pkgconfig/slate.pc
 # to see variable `i`.
 test/test.o: CXXFLAGS += -O0
 
+ifeq (${gpu_backend},sycl)
+
 src/internal/internal_gbnorm.o: CXXFLAGS += -O0
 src/internal/internal_hbnorm.o: CXXFLAGS += -O0
+
+endif
 
 #-------------------------------------------------------------------------------
 # Get Mercurial id, and make version.o depend on it via .id file.
